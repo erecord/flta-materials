@@ -9,7 +9,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // TODO: Add state variables and functions
+  int _selectedIndex = 0;
+
+  static List<Widget> pages = [
+    Container(
+      color: Colors.red,
+    ),
+    Container(
+      color: Colors.green,
+    ),
+    Container(
+      color: Colors.blue,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +39,11 @@ class _HomeState extends State<Home> {
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
-      // TODO: Show selected tab
-      body: Center(
-          child: Text('Let\'s get cooking 👩‍🍳',
-              // 3
-              style: Theme.of(context).textTheme.headline1)),
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: [
           const BottomNavigationBarItem(
               icon: Icon(Icons.card_giftcard), label: 'Card'),
