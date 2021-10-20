@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/card1.dart';
+import 'package:fooderlich/card2.dart';
 
 // 1
 class Home extends StatefulWidget {
@@ -14,9 +15,7 @@ class _HomeState extends State<Home> {
 
   static List<Widget> pages = [
     const Card1(),
-    Container(
-      color: Colors.green,
-    ),
+    const Card2(),
     Container(
       color: Colors.blue,
     ),
