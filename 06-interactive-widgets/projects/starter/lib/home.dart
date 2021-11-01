@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   static List<Widget> pages = <Widget>[
     ExploreScreen(),
     RecipesScreen(),
-    GroceryScreen(),
+    const GroceryScreen(),
   ];
 
   @override
