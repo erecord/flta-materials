@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/components/grocery_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:intl/intl.dart';
@@ -77,7 +78,29 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              // TODO 24: Add callback handler
+              // 1
+              final groceryItem = GroceryItem(
+                id: widget.originalItem?.id ?? const Uuid().v1(),
+                name: _nameController.text,
+                importance: _importance,
+                color: _currentColor,
+                quantity: _currentSliderValue,
+                date: DateTime(
+                  _dueDate.year,
+                  _dueDate.month,
+                  _dueDate.day,
+                  _timeOfDay.hour,
+                  _timeOfDay.minute,
+                ),
+              );
+
+              if (widget.updateInProgress) {
+                // 2
+                widget.onUpdate(groceryItem);
+              } else {
+                // 3
+                widget.onCreate(groceryItem);
+              }
             },
           )
         ],
@@ -106,7 +129,22 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             const SizedBox(height: 10.0),
             buildQuantityField(),
             const SizedBox(height: 10.0),
-            // TODO: 19: Add Grocery Tile
+            GroceryTile(
+              item: GroceryItem(
+                id: 'previewMode',
+                name: _name,
+                importance: _importance,
+                color: _currentColor,
+                quantity: _currentSliderValue,
+                date: DateTime(
+                  _dueDate.year,
+                  _dueDate.month,
+                  _dueDate.day,
+                  _timeOfDay.hour,
+                  _timeOfDay.minute,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -160,7 +198,9 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           'Importance',
           style: GoogleFonts.lato(fontSize: 28.0),
         ),
-        const SizedBox(height: 10,)
+        const SizedBox(
+          height: 10,
+        ),
         // 3
         Wrap(
           spacing: 10.0,

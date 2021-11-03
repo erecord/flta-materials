@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // 1
 class TabManager extends ChangeNotifier {
   // 2
-  int selectedTab = 0;
+  int selectedTab = 2;
 
   // 3
   void goToTab(index) {
